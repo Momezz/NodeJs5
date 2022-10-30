@@ -1,18 +1,49 @@
-
 const axios = require('axios');
-let characters = 'https://rickandmortyapi.com/api/character';
-function getCharacters(){
-    return axios.get(characters);
+
+async function getCharacters() {
+    try {
+        const response = await axios.get(`https://rickandmortyapi.com/api/character`);
+        const names = response.data.results.map((character) => character.name);
+        console.log(names);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-function getEpisodes(){
-
+async function getSingleCharacter(character) {
+    try {
+        const response = await axios.get(`https://rickandmortyapi.com/api/character/${character}`);
+        const names = response.data.name;
+        console.log(names);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-const episodes = 'https://rickandmortyapi.com/api/episode';
+async function getSingleEpisode(id) {
+    try {
+        const response = await axios.get(`https://rickandmortyapi.com/api/episode/${id}`);
+        const episodes = response.data.name;
+        console.log(episodes);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
+async function getEpisodes() {
+    try {
+        const response = await axios.get(`https://rickandmortyapi.com/api/episode`);
+        const episodes = response.data.results.map((episode) => episode.name);
+        console.log(episodes);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 module.exports = {
-    getCharacters
+    getCharacters,
+    getSingleCharacter,
+    getEpisodes,
+    getSingleEpisode
 }
 
